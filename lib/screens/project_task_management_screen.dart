@@ -13,27 +13,12 @@ class ProjectTaskManagementScreen extends StatelessWidget {
       ),
       body: Consumer<ProjectTaskProvider>(
         builder: (context, provider, child) {
-          return ListView(
-            children: <Widget>[
-              ListTile(
-                title: Text('Projects'),
-                onTap: () {
-                  // Navigate to the screen to manage projects
-                },
-              ),
-              ListTile(
-                title: Text('Tasks'),
-                onTap: () {
-                  // Navigate to the screen to manage tasks
-                },
-              ),
-            ],
-          );
+          // Lists for managing projects and tasks would be implemented here
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Open a screen to add new project or task
+          // Add new project or task
         },
         child: Icon(Icons.add),
         tooltip: 'Add Project/Task',

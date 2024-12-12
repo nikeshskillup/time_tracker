@@ -24,88 +24,85 @@ class _AddTimeEntryScreenState extends State<AddTimeEntryScreen> {
       ),
       body: Form(
         key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+        child: Column(
             children: <Widget>[
-              DropdownButtonFormField<String>(
+            DropdownButtonFormField<String>(
                 value: projectId,
                 onChanged: (String? newValue) {
-                  setState(() {
+                setState(() {
                     projectId = newValue!;
-                  });
+                });
                 },
                 decoration: InputDecoration(labelText: 'Project'),
-                items: <String>['Project 1', 'Project 2', 'Project 3']
+                items: <String>['Project 1', 'Project 2', 'Project 3'] // Dummy project names
                     .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
+                return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
-                  );
+                );
                 }).toList(),
-              ),
-              DropdownButtonFormField<String>(
+            ),
+            DropdownButtonFormField<String>(
                 value: taskId,
                 onChanged: (String? newValue) {
-                  setState(() {
+                setState(() {
                     taskId = newValue!;
-                  });
+                });
                 },
                 decoration: InputDecoration(labelText: 'Task'),
-                items: <String>['Task 1', 'Task 2', 'Task 3']
+                items: <String>['Task 1', 'Task 2', 'Task 3'] // Dummy task names
                     .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
+                return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
-                  );
+                );
                 }).toList(),
-              ),
-              TextFormField(
+            ),
+            TextFormField(
                 decoration: InputDecoration(labelText: 'Total Time (hours)'),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                if (value == null || value.isEmpty) {
                     return 'Please enter total time';
-                  }
-                  if (double.tryParse(value) == null) {
+                }
+                if (double.tryParse(value) == null) {
                     return 'Please enter a valid number';
-                  }
-                  return null;
+                }
+                return null;
                 },
                 onSaved: (value) => totalTime = double.parse(value!),
-              ),
-              TextFormField(
+            ),
+            TextFormField(
                 decoration: InputDecoration(labelText: 'Notes'),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                if (value == null || value.isEmpty) {
                     return 'Please enter some notes';
-                  }
-                  return null;
+                }
+                return null;
                 },
                 onSaved: (value) => notes = value!,
-              ),
-              ElevatedButton(
+            ),
+            ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     Provider.of<TimeEntryProvider>(context, listen: false)
                         .addTimeEntry(TimeEntry(
-                      id: DateTime.now().toString(),
-                      projectId: projectId,
-                      taskId: taskId,
-                      totalTime: totalTime,
-                      date: date,
-                      notes: notes,
-                    ));
+                        id: DateTime.now().toString(), // Simple ID generation
+                        projectId: projectId,
+                        taskId: taskId,
+                        totalTime: totalTime,
+                        date: date,
+                        notes: notes,
+                        ));
                     Navigator.pop(context);
-                  }
+                }
                 },
                 child: Text('Save'),
-              ),
+            )
             ],
-          ),
         ),
-      ),
+        ),
     );
   }
 }
